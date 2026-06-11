@@ -1,0 +1,26 @@
+[
+    {
+        "file": "models.py",
+        "model": "NoteSchema",
+        "fields": [
+            {
+                "name": "title: str",
+                "type": "Field(..., min_length=3, max_length=50)"
+            },
+            {
+                "name": "description: str",
+                "type": "Field(..., min_length=3, max_length=50)"
+            }
+        ]
+    },
+    {
+        "file": "models.py",
+        "model": "NoteDB",
+        "fields": [
+            {
+                "name": "id",
+                "type": "int"
+            }
+        ]
+    }
+]

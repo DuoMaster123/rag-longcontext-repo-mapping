@@ -1,0 +1,16 @@
+[
+    {
+        "file": "models.py",
+        "model": "NoteSchema",
+        "fields": [
+            {
+                "name": "title",
+                "type": "str"
+            },
+            {
+                "name": "description",
+                "type": "str"
+            }
+        ]
+    }
+]

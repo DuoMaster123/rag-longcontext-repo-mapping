@@ -1,0 +1,14 @@
+[
+    {
+        "file": "multiple_files",
+        "env_var": "jwt.secret"
+    },
+    {
+        "file": "multiple_files",
+        "env_var": "image.default"
+    },
+    {
+        "file": "multiple_files",
+        "env_var": "jwt.sessionTime"
+    }
+]

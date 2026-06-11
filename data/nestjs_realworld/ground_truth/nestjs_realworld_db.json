@@ -1,0 +1,116 @@
+[
+    {
+        "file": "article.entity.ts",
+        "model": "ArticleEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "slug",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "title",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "description",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "body",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "t",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "t",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "tagList",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "favoriteCount",
+                "type": "extracted_via_regex"
+            }
+        ]
+    },
+    {
+        "file": "comment.entity.ts",
+        "model": "Comment",
+        "fields": [
+            {
+                "name": "id",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "body",
+                "type": "extracted_via_regex"
+            }
+        ]
+    },
+    {
+        "file": "follows.entity.ts",
+        "model": "FollowsEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "followerId",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "followingId",
+                "type": "extracted_via_regex"
+            }
+        ]
+    },
+    {
+        "file": "tag.entity.ts",
+        "model": "TagEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "tag",
+                "type": "extracted_via_regex"
+            }
+        ]
+    },
+    {
+        "file": "user.entity.ts",
+        "model": "UserEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "username",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "bio",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "image",
+                "type": "extracted_via_regex"
+            },
+            {
+                "name": "password",
+                "type": "extracted_via_regex"
+            }
+        ]
+    }
+]

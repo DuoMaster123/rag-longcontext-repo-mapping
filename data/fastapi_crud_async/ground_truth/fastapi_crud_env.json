@@ -1,0 +1,6 @@
+[
+    {
+        "file": "db.py",
+        "env_var": "DATABASE_URL"
+    }
+]

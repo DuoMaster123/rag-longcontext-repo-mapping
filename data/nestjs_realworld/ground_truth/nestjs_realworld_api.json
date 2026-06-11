@@ -1,0 +1,128 @@
+[
+    {
+        "file": "app.controller.ts",
+        "method": "GET",
+        "path": "/",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "GET",
+        "path": "/articles",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "GET",
+        "path": "/articles/feed",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "GET",
+        "path": "/articles/:slug",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "GET",
+        "path": "/articles/:slug/comments",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "POST",
+        "path": "/articles",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "PUT",
+        "path": "/articles/:slug",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "DELETE",
+        "path": "/articles/:slug",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "POST",
+        "path": "/articles/:slug/comments",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "DELETE",
+        "path": "/articles/:slug/comments/:id",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "POST",
+        "path": "/articles/:slug/favorite",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "DELETE",
+        "path": "/articles/:slug/favorite",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "profile.controller.ts",
+        "method": "GET",
+        "path": "/profiles/:username",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "profile.controller.ts",
+        "method": "POST",
+        "path": "/profiles/:username/follow",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "profile.controller.ts",
+        "method": "DELETE",
+        "path": "/profiles/:username/follow",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "tag.controller.ts",
+        "method": "GET",
+        "path": "/tags",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "user.controller.ts",
+        "method": "GET",
+        "path": "/user",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "user.controller.ts",
+        "method": "PUT",
+        "path": "/user",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "user.controller.ts",
+        "method": "POST",
+        "path": "/users",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "user.controller.ts",
+        "method": "DELETE",
+        "path": "/users/:slug",
+        "handler": "unknown_in_regex"
+    },
+    {
+        "file": "user.controller.ts",
+        "method": "POST",
+        "path": "/users/login",
+        "handler": "unknown_in_regex"
+    }
+]

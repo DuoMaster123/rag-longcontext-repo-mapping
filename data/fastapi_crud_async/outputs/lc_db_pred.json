@@ -1,0 +1,56 @@
+[
+    {
+        "file": "src\\app\\db.py",
+        "model": "notes",
+        "fields": [
+            {
+                "name": "id",
+                "type": "Integer"
+            },
+            {
+                "name": "title",
+                "type": "String(50)"
+            },
+            {
+                "name": "description",
+                "type": "String(50)"
+            },
+            {
+                "name": "created_date",
+                "type": "DateTime"
+            }
+        ]
+    },
+    {
+        "file": "src\\app\\api\\models.py",
+        "model": "NoteSchema",
+        "fields": [
+            {
+                "name": "title",
+                "type": "str"
+            },
+            {
+                "name": "description",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "file": "src\\app\\api\\models.py",
+        "model": "NoteDB",
+        "fields": [
+            {
+                "name": "title",
+                "type": "str"
+            },
+            {
+                "name": "description",
+                "type": "str"
+            },
+            {
+                "name": "id",
+                "type": "int"
+            }
+        ]
+    }
+]

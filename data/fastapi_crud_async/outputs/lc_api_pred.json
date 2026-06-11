@@ -1,0 +1,38 @@
+[
+    {
+        "file": "src\\app\\api\\ping.py",
+        "method": "GET",
+        "path": "/ping",
+        "handler": "pong"
+    },
+    {
+        "file": "src\\app\\api\\notes.py",
+        "method": "POST",
+        "path": "/notes/",
+        "handler": "create_note"
+    },
+    {
+        "file": "src\\app\\api\\notes.py",
+        "method": "GET",
+        "path": "/notes/{id}/",
+        "handler": "read_note"
+    },
+    {
+        "file": "src\\app\\api\\notes.py",
+        "method": "GET",
+        "path": "/notes/",
+        "handler": "read_all_notes"
+    },
+    {
+        "file": "src\\app\\api\\notes.py",
+        "method": "PUT",
+        "path": "/notes/{id}/",
+        "handler": "update_note"
+    },
+    {
+        "file": "src\\app\\api\\notes.py",
+        "method": "DELETE",
+        "path": "/notes/{id}/",
+        "handler": "delete_note"
+    }
+]

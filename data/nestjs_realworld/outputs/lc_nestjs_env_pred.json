@@ -1,0 +1,50 @@
+[
+    {
+        "file": "src/shared/base.controller.ts",
+        "env_var": "SECRET"
+    },
+    {
+        "file": "src/user/auth.middleware.ts",
+        "env_var": "SECRET"
+    },
+    {
+        "file": "src/user/user.decorator.ts",
+        "env_var": "SECRET"
+    },
+    {
+        "file": "src/user/user.service.ts",
+        "env_var": "SECRET"
+    },
+    {
+        "file": "src/app.module.ts",
+        "env_var": "TYPEORM_CONNECTION"
+    },
+    {
+        "file": "src/app.module.ts",
+        "env_var": "TYPEORM_HOST"
+    },
+    {
+        "file": "src/app.module.ts",
+        "env_var": "TYPEORM_PORT"
+    },
+    {
+        "file": "src/app.module.ts",
+        "env_var": "TYPEORM_USERNAME"
+    },
+    {
+        "file": "src/app.module.ts",
+        "env_var": "TYPEORM_PASSWORD"
+    },
+    {
+        "file": "src/app.module.ts",
+        "env_var": "TYPEORM_DATABASE"
+    },
+    {
+        "file": "src/app.module.ts",
+        "env_var": "TYPEORM_SYNCHRONIZE"
+    },
+    {
+        "file": "src/app.module.ts",
+        "env_var": "TYPEORM_LOGGING"
+    }
+]

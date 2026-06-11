@@ -1,0 +1,140 @@
+[
+    {
+        "file": "src\\article\\article.entity.ts",
+        "model": "ArticleEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "slug",
+                "type": "string"
+            },
+            {
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "name": "description",
+                "type": "string"
+            },
+            {
+                "name": "body",
+                "type": "string"
+            },
+            {
+                "name": "created",
+                "type": "Date"
+            },
+            {
+                "name": "updated",
+                "type": "Date"
+            },
+            {
+                "name": "tagList",
+                "type": "string[]"
+            },
+            {
+                "name": "author",
+                "type": "UserEntity"
+            },
+            {
+                "name": "comments",
+                "type": "Comment[]"
+            },
+            {
+                "name": "favoriteCount",
+                "type": "number"
+            }
+        ]
+    },
+    {
+        "file": "src\\article\\comment.entity.ts",
+        "model": "Comment",
+        "fields": [
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "body",
+                "type": "string"
+            },
+            {
+                "name": "article",
+                "type": "ArticleEntity"
+            }
+        ]
+    },
+    {
+        "file": "src\\profile\\follows.entity.ts",
+        "model": "FollowsEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "followerId",
+                "type": "number"
+            },
+            {
+                "name": "followingId",
+                "type": "number"
+            }
+        ]
+    },
+    {
+        "file": "src\\tag\\tag.entity.ts",
+        "model": "TagEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "tag",
+                "type": "string"
+            }
+        ]
+    },
+    {
+        "file": "src\\user\\user.entity.ts",
+        "model": "UserEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "username",
+                "type": "string"
+            },
+            {
+                "name": "email",
+                "type": "string"
+            },
+            {
+                "name": "bio",
+                "type": "string"
+            },
+            {
+                "name": "image",
+                "type": "string"
+            },
+            {
+                "name": "password",
+                "type": "string"
+            },
+            {
+                "name": "favorites",
+                "type": "ArticleEntity[]"
+            },
+            {
+                "name": "articles",
+                "type": "ArticleEntity[]"
+            }
+        ]
+    }
+]

@@ -1,0 +1,102 @@
+[
+    {
+        "file": "comment.entity.ts",
+        "model": "Comment",
+        "fields": [
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "body",
+                "type": "string"
+            },
+            {
+                "name": "article",
+                "type": "ArticleEntity"
+            }
+        ]
+    },
+    {
+        "file": "follows.entity.ts",
+        "model": "FollowsEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "followerId",
+                "type": "number"
+            },
+            {
+                "name": "followingId",
+                "type": "number"
+            }
+        ]
+    },
+    {
+        "file": "tag.entity.ts",
+        "model": "TagEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "tag",
+                "type": "string"
+            }
+        ]
+    },
+    {
+        "file": "article.entity.ts",
+        "model": "ArticleEntity",
+        "fields": [
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "slug",
+                "type": "string"
+            },
+            {
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "name": "description",
+                "type": "string"
+            },
+            {
+                "name": "body",
+                "type": "string"
+            },
+            {
+                "name": "created",
+                "type": "Date"
+            },
+            {
+                "name": "updated",
+                "type": "Date"
+            },
+            {
+                "name": "tagList",
+                "type": "string[]"
+            },
+            {
+                "name": "author",
+                "type": "UserEntity"
+            },
+            {
+                "name": "comments",
+                "type": "Comment[]"
+            },
+            {
+                "name": "favoriteCount",
+                "type": "number"
+            }
+        ]
+    }
+]

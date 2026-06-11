@@ -1,0 +1,26 @@
+[
+    {
+        "file": "article.controller.ts",
+        "method": "GET",
+        "path": "/articles",
+        "handler": "findAll"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "GET",
+        "path": "/articles/feed",
+        "handler": "getFeed"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "GET",
+        "path": "/articles/:slug",
+        "handler": "findOne"
+    },
+    {
+        "file": "article.controller.ts",
+        "method": "GET",
+        "path": "/articles/:slug/comments",
+        "handler": "findComments"
+    }
+]

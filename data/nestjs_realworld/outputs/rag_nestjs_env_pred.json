@@ -1,0 +1,14 @@
+[
+    {
+        "file": "user.interface.ts",
+        "env_var": "JWT_SECRET"
+    },
+    {
+        "file": "app.controller.ts",
+        "env_var": "APP_PORT"
+    },
+    {
+        "file": "create-user.dto.ts",
+        "env_var": "DATABASE_URL"
+    }
+]

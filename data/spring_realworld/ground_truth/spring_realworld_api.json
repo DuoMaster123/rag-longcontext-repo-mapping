@@ -1,0 +1,116 @@
+[
+    {
+        "file": "ArticleApi.java",
+        "method": "GET",
+        "path": "/articles/{slug}",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ArticleApi.java",
+        "method": "PUT",
+        "path": "/articles/{slug}",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ArticleApi.java",
+        "method": "DELETE",
+        "path": "/articles/{slug}",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ArticleFavoriteApi.java",
+        "method": "POST",
+        "path": "/articles/{slug}/favorite",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ArticleFavoriteApi.java",
+        "method": "DELETE",
+        "path": "/articles/{slug}/favorite",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ArticlesApi.java",
+        "method": "POST",
+        "path": "/articles",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ArticlesApi.java",
+        "method": "GET",
+        "path": "/articles/feed",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ArticlesApi.java",
+        "method": "GET",
+        "path": "/articles",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "CommentsApi.java",
+        "method": "POST",
+        "path": "/articles/{slug}/comments",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "CommentsApi.java",
+        "method": "GET",
+        "path": "/articles/{slug}/comments",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "CommentsApi.java",
+        "method": "DELETE",
+        "path": "/articles/{slug}/comments/{id}",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "CurrentUserApi.java",
+        "method": "GET",
+        "path": "/user",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "CurrentUserApi.java",
+        "method": "PUT",
+        "path": "/user",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ProfileApi.java",
+        "method": "GET",
+        "path": "/profiles/{username}",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ProfileApi.java",
+        "method": "POST",
+        "path": "/profiles/{username}/follow",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "ProfileApi.java",
+        "method": "DELETE",
+        "path": "/profiles/{username}/follow",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "TagsApi.java",
+        "method": "GET",
+        "path": "/tags",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "UsersApi.java",
+        "method": "POST",
+        "path": "/users",
+        "handler": "extracted_via_java_regex"
+    },
+    {
+        "file": "UsersApi.java",
+        "method": "POST",
+        "path": "/users/login",
+        "handler": "extracted_via_java_regex"
+    }
+]

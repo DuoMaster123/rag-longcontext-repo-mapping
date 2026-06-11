@@ -1,0 +1,128 @@
+[
+    {
+        "file": "src\\app.controller.ts",
+        "method": "GET",
+        "path": "/api",
+        "handler": "AppController.root"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "GET",
+        "path": "/api/articles",
+        "handler": "ArticleController.findAll"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "GET",
+        "path": "/api/articles/feed",
+        "handler": "ArticleController.getFeed"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "GET",
+        "path": "/api/articles/:slug",
+        "handler": "ArticleController.findOne"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "GET",
+        "path": "/api/articles/:slug/comments",
+        "handler": "ArticleController.findComments"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "POST",
+        "path": "/api/articles",
+        "handler": "ArticleController.create"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "PUT",
+        "path": "/api/articles/:slug",
+        "handler": "ArticleController.update"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "DELETE",
+        "path": "/api/articles/:slug",
+        "handler": "ArticleController.delete"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "POST",
+        "path": "/api/articles/:slug/comments",
+        "handler": "ArticleController.createComment"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "DELETE",
+        "path": "/api/articles/:slug/comments/:id",
+        "handler": "ArticleController.deleteComment"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "POST",
+        "path": "/api/articles/:slug/favorite",
+        "handler": "ArticleController.favorite"
+    },
+    {
+        "file": "src\\article\\article.controller.ts",
+        "method": "DELETE",
+        "path": "/api/articles/:slug/favorite",
+        "handler": "ArticleController.unFavorite"
+    },
+    {
+        "file": "src\\profile\\profile.controller.ts",
+        "method": "GET",
+        "path": "/api/profiles/:username",
+        "handler": "ProfileController.getProfile"
+    },
+    {
+        "file": "src\\profile\\profile.controller.ts",
+        "method": "POST",
+        "path": "/api/profiles/:username/follow",
+        "handler": "ProfileController.follow"
+    },
+    {
+        "file": "src\\profile\\profile.controller.ts",
+        "method": "DELETE",
+        "path": "/api/profiles/:username/follow",
+        "handler": "ProfileController.unFollow"
+    },
+    {
+        "file": "src\\tag\\tag.controller.ts",
+        "method": "GET",
+        "path": "/api/tags",
+        "handler": "TagController.findAll"
+    },
+    {
+        "file": "src\\user\\user.controller.ts",
+        "method": "GET",
+        "path": "/api/user",
+        "handler": "UserController.findMe"
+    },
+    {
+        "file": "src\\user\\user.controller.ts",
+        "method": "PUT",
+        "path": "/api/user",
+        "handler": "UserController.update"
+    },
+    {
+        "file": "src\\user\\user.controller.ts",
+        "method": "POST",
+        "path": "/api/users",
+        "handler": "UserController.create"
+    },
+    {
+        "file": "src\\user\\user.controller.ts",
+        "method": "DELETE",
+        "path": "/api/users/:slug",
+        "handler": "UserController.delete"
+    },
+    {
+        "file": "src\\user\\user.controller.ts",
+        "method": "POST",
+        "path": "/api/users/login",
+        "handler": "UserController.login"
+    }
+]

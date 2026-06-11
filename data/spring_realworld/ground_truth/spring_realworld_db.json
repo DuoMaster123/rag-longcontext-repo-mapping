@@ -1,0 +1,27 @@
+[
+    {
+        "file": "Article.java",
+        "model": "Article",
+        "fields": [{"name": "extracted_manually", "type": "unknown"}]
+    },
+    {
+        "file": "User.java",
+        "model": "User",
+        "fields": [{"name": "extracted_manually", "type": "unknown"}]
+    },
+    {
+        "file": "Comment.java",
+        "model": "Comment",
+        "fields": [{"name": "extracted_manually", "type": "unknown"}]
+    },
+    {
+        "file": "Tag.java",
+        "model": "Tag",
+        "fields": [{"name": "extracted_manually", "type": "unknown"}]
+    },
+    {
+        "file": "FollowRelation.java",
+        "model": "FollowRelation",
+        "fields": [{"name": "extracted_manually", "type": "unknown"}]
+    }
+]
