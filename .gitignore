@@ -1,0 +1,18 @@
+# Environments
+venv/
+env/
+.env
+
+# Cache and temporary files
+__pycache__/
+*.pyc
+.pytest_cache/
+.streamlit/
+
+# Vector Database and Workspaces
+data/vector_db/
+data/live_workspace/
+
+# IDE files
+.vscode/
+.idea/
