@@ -9,7 +9,6 @@ from src.evaluation.evaluator import ModelEvaluator
 from src.core.git_manager import GitManager
 from src.data_prep.build_vector_db import UniversalVectorBuilder
 
-# Import parsers for live auto-ground-truth generation
 from src.data_prep.fastapi_api_parser import FastAPIParser
 from src.data_prep.fastapi_db_parser import DBModelParser as FastAPIDBParser
 from src.data_prep.fastapi_env_parser import EnvVarParser as FastAPIEnvParser
@@ -22,7 +21,7 @@ from src.data_prep.spring_api_parser import SpringBootAPIParser
 from src.data_prep.spring_db_parser import SpringBootDBParser
 from src.data_prep.spring_env_parser import SpringBootEnvParser
 
-# Project Configurations for Static Research Mode (Mode 1)
+# Project Configurations for Static Research Mode
 PROJECT_CONFIGS = {
     "fastapi_crud_async": {
         "raw_path": "data/raw/fastapi-crud-async",
@@ -71,7 +70,7 @@ def run_dynamic_experiment():
             continue
 
         for task in TASKS:
-            print(f"\n[INFO] --- EXECUTING EXTRACTION TASK: {task} ---")
+            print(f"\n[INFO] Executing extraction task: {task}")
 
             base_dir = Path(f"data/{project_name}")
             gt_file = base_dir / "ground_truth" / f"{gt_prefix}_{task.lower()}.json"
@@ -80,23 +79,23 @@ def run_dynamic_experiment():
             lc_out = base_dir / "outputs" / f"lc_{task.lower()}_pred.json"
 
             # 1. RAG Extraction
-            print(f"[INFO] [RAG Architecture] Extracting {task} context...")
+            print(f"[INFO] [RAG] Extracting context...")
             try:
                 rag_result = rag_engine.extract_information(task_type=task)
                 with open(rag_out, "w", encoding="utf-8") as f:
                     json.dump(rag_result, f, indent=4, ensure_ascii=False)
             except Exception as e:
-                print(f"[ERROR] RAG Pipeline encountered a fatal error on {task}: {e}")
+                print(f"[ERROR] RAG Pipeline fatal error on {task}: {e}")
                 with open(rag_out, "w", encoding="utf-8") as f: json.dump([], f)
 
             # 2. Long-Context Extraction
-            print(f"[INFO] [Long-Context Architecture] Parsing full repository for {task}...")
+            print(f"[INFO] [Long-Context] Parsing full repository...")
             try:
                 lc_result = lc_engine.extract_information(repo_path=repo_path, task_type=task)
                 with open(lc_out, "w", encoding="utf-8") as f:
                     json.dump(lc_result, f, indent=4, ensure_ascii=False)
             except Exception as e:
-                print(f"[ERROR] Long-Context Pipeline encountered a fatal error on {task}: {e}")
+                print(f"[ERROR] Long-Context Pipeline fatal error on {task}: {e}")
                 with open(lc_out, "w", encoding="utf-8") as f: json.dump([], f)
 
             # 3. Metrics Calculation
@@ -107,6 +106,7 @@ def run_dynamic_experiment():
             else:
                 print(f"[ERROR] Ground truth missing at {gt_file}. Cannot compute metrics.")
 
+            # Cooldown to respect API limits
             time.sleep(10)
 
     print("\n[SUCCESS] ALL PROJECT EXPERIMENTS COMPLETED SUCCESSFULLY.")
@@ -125,7 +125,7 @@ def run_live_analysis(repo_url: str):
     framework = git_manager.detect_framework(raw_path)
     print(f"[INFO] Verified Architecture Framework: {framework}")
 
-    # 2. Select Dynamic Parsers based on framework
+    # 2. Select dynamic parsers based on framework
     if framework == "FastAPI (Python)":
         api_parser, db_parser, env_parser = FastAPIParser(), FastAPIDBParser(), FastAPIEnvParser()
         file_ext = "*.py"
@@ -138,7 +138,7 @@ def run_live_analysis(repo_url: str):
     else:
         raise ValueError("[ERROR] Framework is currently unsupported for live evaluation.")
 
-    # 3. Auto-Generate Ground Truth via heuristics
+    # 3. Auto-Generate Ground Truth via AST heuristics
     repo_name = Path(base_dir_str).name
     base_dir = Path(base_dir_str)
     gt_dir = base_dir / "ground_truth"
@@ -165,7 +165,7 @@ def run_live_analysis(repo_url: str):
 
     # 6. Execute Extractions and Score
     for task in TASKS:
-        print(f"\n[INFO] --- EXECUTING LIVE EXTRACTION TASK: {task} ---")
+        print(f"\n[INFO] Executing live extraction task: {task}")
         
         gt_file = gt_dir / f"{repo_name}_{task.lower()}.json"
         rag_out = out_dir / f"rag_{task.lower()}_pred.json"
@@ -178,7 +178,7 @@ def run_live_analysis(repo_url: str):
             with open(rag_out, "w", encoding="utf-8") as f:
                 json.dump(rag_result, f, indent=4, ensure_ascii=False)
         except Exception as e:
-            print(f"[ERROR] RAG Failed: {e}")
+            print(f"[ERROR] RAG extraction failed: {e}")
             with open(rag_out, "w", encoding="utf-8") as f: json.dump([], f)
 
         # Long-Context Execution
@@ -188,7 +188,7 @@ def run_live_analysis(repo_url: str):
             with open(lc_out, "w", encoding="utf-8") as f:
                 json.dump(lc_result, f, indent=4, ensure_ascii=False)
         except Exception as e:
-            print(f"[ERROR] Long-Context Failed: {e}")
+            print(f"[ERROR] Long-Context extraction failed: {e}")
             with open(lc_out, "w", encoding="utf-8") as f: json.dump([], f)
 
         # Collect scores
@@ -197,11 +197,14 @@ def run_live_analysis(repo_url: str):
         lc_scores = evaluator.evaluate_task(ground_truth_path=str(gt_file), prediction_path=str(lc_out), task_type=task)
         
         live_metrics[task] = {"RAG": rag_scores, "LC": lc_scores}
-        time.sleep(5) 
+        
+        # Prevent hitting API rate limits on free tiers by adding a cooldown
+        if task != "ENV":
+            print("[INFO] Cooldown active. Waiting 15 seconds to prevent rate limiting...")
+            time.sleep(15)
 
     print(f"\n[SUCCESS] LIVE ANALYSIS COMPLETED FOR: {repo_name}")
     
-    # Return metrics payload for UI visualization
     return {
         "repo_name": repo_name,
         "framework": framework,
