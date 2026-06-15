@@ -3,9 +3,12 @@ import os
 
 class APIKeyManager:
     def __init__(self, api_keys: list):
-        self.api_keys = [key for key in api_keys if key and key.strip()]
+        # Safely filter out None values and empty strings to prevent silent failures
+        self.api_keys = [key for key in api_keys if key and isinstance(key, str) and key.strip()]
+        
         if not self.api_keys:
-            raise ValueError("[ERROR] No API keys configured.")
+            raise ValueError("[ERROR] No API keys configured. Please check Streamlit Secrets or .env file format (requires quotes for strings in TOML).")
+        
         self.current_index = 0
 
     def get_key(self) -> str:
