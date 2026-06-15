@@ -5,7 +5,11 @@ openai>=1.13.3
 google-genai>=0.3.0
 python-dotenv>=1.0.1
 chromadb>=0.4.24
-tree-sitter==0.21.0
-tree-sitter-python==0.21.0
 Pillow
 protobuf<4.0.0
+
+# AST Parsers
+tree-sitter
+tree-sitter-python
+tree-sitter-typescript
+tree-sitter-java
