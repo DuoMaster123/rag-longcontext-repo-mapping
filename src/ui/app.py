@@ -12,8 +12,11 @@ from PIL import Image
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 try:
     from master_runner import run_live_analysis
-except ImportError:
+    backend_err = ""
+except Exception as e:
+    import traceback
     run_live_analysis = None
+    backend_err = traceback.format_exc()
 
 # Page configuration
 st.set_page_config(
@@ -346,7 +349,8 @@ elif app_mode == "Live Analyzer":
         if not repo_url:
             st.warning("Please provide a valid GitHub URL.")
         elif run_live_analysis is None:
-            st.error("Live analysis backend is not available.")
+            st.error("Starting Backend Failed. Error details:")
+            st.code(backend_err)
         else:
             with st.spinner("Cloning repository, building Vector DB, and running AI extraction. This may take a few minutes..."):
                 try:
