@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 import tree_sitter_python as tspython
-from tree_sitter import Language, Parser, Query, QueryCursor
+from tree_sitter import Language, Parser
 
 class DBModelParser:
     def __init__(self):
