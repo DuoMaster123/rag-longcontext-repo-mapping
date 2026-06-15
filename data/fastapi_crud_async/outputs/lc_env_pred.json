@@ -1,6 +1,1 @@
-[
-    {
-        "file": "src\\app\\db.py",
-        "env_var": "DATABASE_URL"
-    }
-]
+"[\n  {\n    \"file\": \"src\\\\app\\\\db.py\",\n    \"env_var\": \"DATABASE_URL\"\n  }\n]"

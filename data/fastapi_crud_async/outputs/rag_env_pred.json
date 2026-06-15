@@ -1,1 +1,1 @@
-[]
+"[\n  {\n    \"file\": \"main.py\",\n    \"env_var\": \"DATABASE_URL\"\n  },\n  {\n    \"file\": \"crud.py\",\n    \"env_var\": \"DATABASE_URL\"\n  },\n  {\n    \"file\": \"notes.py\",\n    \"env_var\": \"DATABASE_URL\"\n  }\n]"

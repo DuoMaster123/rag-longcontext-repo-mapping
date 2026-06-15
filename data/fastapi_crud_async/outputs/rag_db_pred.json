@@ -1,16 +1,1 @@
-[
-    {
-        "file": "models.py",
-        "model": "NoteSchema",
-        "fields": [
-            {
-                "name": "title",
-                "type": "str"
-            },
-            {
-                "name": "description",
-                "type": "str"
-            }
-        ]
-    }
-]
+"[\n  {\n    \"file\": \"models.py\",\n    \"model\": \"NoteSchema\",\n    \"fields\": [\n      {\n        \"name\": \"title\",\n        \"type\": \"str\"\n      },\n      {\n        \"name\": \"description\",\n        \"type\": \"str\"\n      }\n    ]\n  }\n]"
