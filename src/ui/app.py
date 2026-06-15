@@ -349,98 +349,105 @@ elif app_mode == "Live Analyzer":
         if not repo_url:
             st.warning("Please provide a valid GitHub URL.")
         elif run_live_analysis is None:
-            st.error("Starting Backend Failed. Error details:")
+            st.error("🚨 Khởi động Backend thất bại! Lỗi chi tiết:")
             st.code(backend_err)
         else:
             with st.spinner("Cloning repository, building Vector DB, and running AI extraction. This may take a few minutes..."):
                 try:
-                    result_meta = run_live_analysis(repo_url)
-                    st.success(f"Analysis complete for **{result_meta['repo_name']}** ({result_meta['framework']})")
-                    
-                    st.markdown("### Live Performance Metrics")
-                    metrics = result_meta.get("metrics", {})
-                    
-                    if metrics:
-                        chart_data = {
-                            "Task": [],
-                            "RAG (GPT-4o)": [],
-                            "Long-Context (Gemini 2.5)": []
-                        }
-                        
-                        for task_name, scores in metrics.items():
-                            rag_data = scores.get("RAG") if scores.get("RAG") else {}
-                            lc_data = scores.get("LC") if scores.get("LC") else {}
-                            
-                            chart_data["Task"].append(task_name)
-                            chart_data["RAG (GPT-4o)"].append(rag_data.get("f1_score", 0.0))
-                            chart_data["Long-Context (Gemini 2.5)"].append(lc_data.get("f1_score", 0.0))
-                            
-                        df = pd.DataFrame(chart_data).set_index("Task")
-                        df_melted = pd.DataFrame(chart_data).melt(id_vars="Task", var_name="Architecture", value_name="F1-Score")
-                        
-                        fig = px.bar(
-                            df_melted, 
-                            x="Task", 
-                            y="F1-Score", 
-                            color="Architecture", 
-                            barmode="group",
-                            color_discrete_sequence=["#3b82f6", "#8b5cf6"],
-                            text="F1-Score" 
-                        )
-                        
-                        fig.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
-                        fig.update_layout(
-                            yaxis=dict(range=[0, 115]),
-                            margin=dict(t=20, b=0, l=0, r=0),
-                            legend_title_text=None,
-                            plot_bgcolor='rgba(0,0,0,0)',
-                            paper_bgcolor='rgba(0,0,0,0)'
-                        )
-                        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#e5e7eb')
-                        
-                        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-                        st.markdown('<div class="sidebar-label">F1-Score Comparison (%)</div>', unsafe_allow_html=True)
-                        st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False}) 
-                        
-                        with st.expander("View Raw Metric Data"):
-                            st.dataframe(df, use_container_width=True)
-                            
-                        st.markdown('</div>', unsafe_allow_html=True)
-                    
-                    st.markdown("<br>", unsafe_allow_html=True)
-                    st.markdown("### Live Extraction Results")
-                    
-                    expand_json_live = st.toggle("Expand all JSON blocks", value=False, key="live_expand")
-                    st.markdown("<div style='margin-bottom: 0.5rem;'></div>", unsafe_allow_html=True)
-
-                    base_dir = Path(result_meta['base_dir'])
-                    gt_dir = base_dir / "ground_truth"
-                    out_dir = base_dir / "outputs"
-                    
-                    task_tabs = st.tabs(["API Endpoints", "Database Models", "Environment Variables"])
-                    tasks_info = [("API", "api"), ("DB", "db"), ("ENV", "env")]
-                    
-                    for tab, (task_name, task_key) in zip(task_tabs, tasks_info):
-                        with tab:
-                            gt_path = gt_dir / f"{result_meta['repo_name']}_{task_key}.json"
-                            rag_path = out_dir / f"rag_{task_key}_pred.json"
-                            lc_path = out_dir / f"lc_{task_key}_pred.json"
-                            
-                            col_gt, col_rag, col_lc = st.columns(3)
-                            
-                            with col_gt:
-                                st.markdown('<div class="json-header header-gt">Auto Ground Truth (Parser)</div>', unsafe_allow_html=True)
-                                st.json(load_json(str(gt_path)), expanded=expand_json_live)
-                                
-                            with col_rag:
-                                st.markdown('<div class="json-header header-rag">RAG (GPT-4o)</div>', unsafe_allow_html=True)
-                                st.json(load_json(str(rag_path)), expanded=expand_json_live)
-                                
-                            with col_lc:
-                                st.markdown('<div class="json-header header-lc">Long-Context (Gemini 2.5)</div>', unsafe_allow_html=True)
-                                st.json(load_json(str(lc_path)), expanded=expand_json_live)
-                                
+                    # Persist results in session state to prevent data loss on page rerun
+                    st.session_state['live_result'] = run_live_analysis(repo_url)
                 except Exception as e:
                     st.error(f"Analysis failed: {e}")
+
+    # Render dashboard elements if analysis data exists in session state
+    if 'live_result' in st.session_state:
+        result_meta = st.session_state['live_result']
+        st.success(f"Analysis complete for **{result_meta['repo_name']}** ({result_meta['framework']})")
+        
+        st.markdown("### Live Performance Metrics")
+        metrics = result_meta.get("metrics", {})
+        
+        if metrics:
+            chart_data = {
+                "Task": [],
+                "RAG (GPT-4o)": [],
+                "Long-Context (Gemini 2.5)": []
+            }
+            
+            # Map metric metrics to the visualization dataframe
+            for task_name, scores in metrics.items():
+                rag_data = scores.get("RAG") if scores.get("RAG") else {}
+                lc_data = scores.get("LC") if scores.get("LC") else {}
+                
+                chart_data["Task"].append(task_name)
+                chart_data["RAG (GPT-4o)"].append(rag_data.get("f1_score", 0.0))
+                chart_data["Long-Context (Gemini 2.5)"].append(lc_data.get("f1_score", 0.0))
+                
+            df = pd.DataFrame(chart_data).set_index("Task")
+            df_melted = pd.DataFrame(chart_data).melt(id_vars="Task", var_name="Architecture", value_name="F1-Score")
+            
+            # Build and configure the Plotly bar chart
+            fig = px.bar(
+                df_melted, 
+                x="Task", 
+                y="F1-Score", 
+                color="Architecture", 
+                barmode="group",
+                color_discrete_sequence=["#3b82f6", "#8b5cf6"],
+                text="F1-Score" 
+            )
+            
+            fig.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
+            fig.update_layout(
+                yaxis=dict(range=[0, 115]),
+                margin=dict(t=20, b=0, l=0, r=0),
+                legend_title_text=None,
+                plot_bgcolor='rgba(0,0,0,0)',
+                paper_bgcolor='rgba(0,0,0,0)'
+            )
+            fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#e5e7eb')
+            
+            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+            st.markdown('<div class="sidebar-label">F1-Score Comparison (%)</div>', unsafe_allow_html=True)
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False}) 
+            
+            with st.expander("View Raw Metric Data"):
+                st.dataframe(df, use_container_width=True)
+                
+            st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("### Live Extraction Results")
+        
+        expand_json_live = st.toggle("Expand all JSON blocks", value=False, key="live_expand")
+        st.markdown("<div style='margin-bottom: 0.5rem;'></div>", unsafe_allow_html=True)
+
+        base_dir = Path(result_meta['base_dir'])
+        gt_dir = base_dir / "ground_truth"
+        out_dir = base_dir / "outputs"
+        
+        task_tabs = st.tabs(["API Endpoints", "Database Models", "Environment Variables"])
+        tasks_info = [("API", "api"), ("DB", "db"), ("ENV", "env")]
+        
+        # Display individual JSON comparison blocks within tabs
+        for tab, (task_name, task_key) in zip(task_tabs, tasks_info):
+            with tab:
+                gt_path = gt_dir / f"{result_meta['repo_name']}_{task_key}.json"
+                rag_path = out_dir / f"rag_{task_key}_pred.json"
+                lc_path = out_dir / f"lc_{task_key}_pred.json"
+                
+                col_gt, col_rag, col_lc = st.columns(3)
+                
+                with col_gt:
+                    st.markdown('<div class="json-header header-gt">Auto Ground Truth (Parser)</div>', unsafe_allow_html=True)
+                    st.json(load_json(str(gt_path)), expanded=expand_json_live)
+                    
+                with col_rag:
+                    st.markdown('<div class="json-header header-rag">RAG (GPT-4o)</div>', unsafe_allow_html=True)
+                    st.json(load_json(str(rag_path)), expanded=expand_json_live)
+                    
+                with col_lc:
+                    st.markdown('<div class="json-header header-lc">Long-Context (Gemini 2.5)</div>', unsafe_allow_html=True)
+                    st.json(load_json(str(lc_path)), expanded=expand_json_live)
 
 st.markdown("<hr style='margin-top: 3rem;'><p style='text-align:center; color:#9ca3af; font-size:0.8rem;'>AI Software Engineering Research</p>", unsafe_allow_html=True)
