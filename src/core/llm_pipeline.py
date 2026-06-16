@@ -13,8 +13,8 @@ load_dotenv()
 
 class AIEngine:
     def __init__(self):
-        github_keys = [os.getenv("GITHUB_TOKEN_1"), os.getenv("GITHUB_TOKEN_2")]
-        gemini_keys = [os.getenv("GEMINI_KEY_1"), os.getenv("GEMINI_KEY_2")]
+        github_keys = [os.getenv("GITHUB_TOKEN_1"), os.getenv("GITHUB_TOKEN_2"), os.getenv("GITHUB_TOKEN_3")]
+        gemini_keys = [os.getenv("GEMINI_KEY_1"), os.getenv("GEMINI_KEY_2"), os.getenv("GEMINI_KEY_3")]
         
         self.github_manager = APIKeyManager(github_keys)
         self.gemini_manager = APIKeyManager(gemini_keys)
