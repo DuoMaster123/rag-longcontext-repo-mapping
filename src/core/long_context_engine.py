@@ -14,7 +14,9 @@ class LongContextEngine:
     def pack_repository(self, repo_path: str) -> str:
         """Packages the entire repository (.py, .ts, .java) into a single string wrapped in XML-like tags."""
         repo_dir = Path(repo_path)
-        ignored_dirs = {'.git', 'venv', '__pycache__', '.pytest_cache', 'tests', 'node_modules', 'dist', 'target', '.idea'}
+        
+        # Enhanced token optimization: Aggressively ignore boilerplate, virtual envs, and testing directories
+        ignored_dirs = {'.git', 'venv', '.venv', 'env', '__pycache__', '.pytest_cache', 'tests', 'test', 'node_modules', 'dist', 'target', '.idea', 'migrations', 'coverage', '.github', 'build'}
         valid_extensions = {'.py', '.ts', '.java'}
         
         full_context = []
@@ -22,8 +24,12 @@ class LongContextEngine:
             if file_path.suffix in valid_extensions and not any(ignored in file_path.parts for ignored in ignored_dirs):
                 try:
                     content = file_path.read_text(encoding='utf-8')
+                    
+                    # Token Optimization: Strip empty lines to aggressively compress payload size
+                    optimized_content = "\n".join(line for line in content.splitlines() if line.strip())
+                    
                     rel_path = file_path.relative_to(repo_dir)
-                    full_context.append(f'<file path="{rel_path}">\n{content}\n</file>')
+                    full_context.append(f'<file path="{rel_path}">\n{optimized_content}\n</file>')
                 except Exception as e:
                     print(f"[WARN] Skipped file {file_path.name} due to read error: {e}")
                     

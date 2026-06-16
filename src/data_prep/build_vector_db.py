@@ -39,8 +39,8 @@ class UniversalVectorBuilder:
         print(f"[INFO] Scanning source code at: {repo_path}")
         repo_dir = Path(repo_path)
         
-        # Ignore irrelevant directories
-        ignored_dirs = {'target', '.git', 'src/test', '.idea', 'node_modules', 'dist', 'venv', '__pycache__'}
+        # Enhanced token optimization: Ignore boilerplate and testing directories
+        ignored_dirs = {'target', '.git', 'src/test', 'test', 'tests', '.idea', 'node_modules', 'dist', 'venv', '.venv', 'env', '__pycache__', 'migrations', 'coverage', 'build'}
         
         documents = []
         metadatas = []
@@ -51,7 +51,11 @@ class UniversalVectorBuilder:
             if not any(ignored in file_path.parts for ignored in ignored_dirs):
                 try:
                     content = file_path.read_text(encoding='utf-8')
-                    chunks = self.simple_chunker(content)
+                    
+                    # Token Optimization: Strip empty lines to maximize token density per chunk
+                    optimized_content = "\n".join(line for line in content.splitlines() if line.strip())
+                    
+                    chunks = self.simple_chunker(optimized_content)
                     
                     for chunk in chunks:
                         documents.append(chunk)
